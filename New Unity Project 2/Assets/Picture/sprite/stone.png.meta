@@ -45,6 +45,15 @@ TextureImporter:
     compressionQuality: 50
   spriteSheet:
     sprites:
+    - name: NoStone
+      rect:
+        serializedVersion: 2
+        x: 450
+        y: 1800
+        width: 450
+        height: 450
+      alignment: 0
+      pivot: {x: .5, y: .5}
     - name: SBN
       rect:
         serializedVersion: 2
@@ -66,7 +75,7 @@ TextureImporter:
     - name: SBR2
       rect:
         serializedVersion: 2
-        x: 895
+        x: 900
         y: 1350
         width: 450
         height: 450
@@ -102,8 +111,8 @@ TextureImporter:
     - name: stone_8
       rect:
         serializedVersion: 2
-        x: 900
-        y: 900
+        x: 895
+        y: 910
         width: 450
         height: 450
       alignment: 0
