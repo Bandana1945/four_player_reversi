@@ -5,6 +5,8 @@ using System;
 public class Game_Main : MonoBehaviour {
 	public GameObject P_STONE;
 	public int[,] Banmen=new int[8,8];
+	public GameObject[,] Stones = new GameObject[8, 8];
+	public float Turn=1;//ターン管理変数
 	// Use this for initialization
 	//盤面の初期化を行います
 	void Start () {
@@ -31,8 +33,8 @@ public class Game_Main : MonoBehaviour {
 		Pos.x = -18.0f;
 		Pos.y = 23.5f;
 		Pos.z = 0.0f;
-		int Board_X = (int)(Math.Floor ((vec.x + 18+2.25)) / 5.1);
-		int Board_Y = (int)(Math.Floor ((vec.y - 23.5-2.25)) / 5.1 * -1);
+		int Board_X = (int)(Math.Floor ((vec.x + 18+2.65)) / 5.1);
+		int Board_Y = (int)(Math.Floor ((vec.y - 23.5-2.55)) / 5.1 * -1);
 		if (Input.GetMouseButtonDown (0)) {
 			if(Board_X>=0&&Board_X<=7&&Board_Y>=0&&Board_Y<=7)
 			{
@@ -40,8 +42,13 @@ public class Game_Main : MonoBehaviour {
 				{
 					Pos.x=Pos.x+(5.1f*Board_X);
 					Pos.y=Pos.y-(5.1f*Board_Y);
-					Instantiate (this.P_STONE, Pos, Quaternion.identity);
-					Banmen[Board_X,Board_Y]=1;
+					Stones[Board_X,Board_Y]=Instantiate (this.P_STONE, Pos, Quaternion.identity) as GameObject;
+					Stone stonescript = Stones[Board_X,Board_Y].GetComponent<Stone>();
+					stonescript.Init(Turn);
+					Banmen[Board_X,Board_Y]=(int)Turn;
+					Turn++;
+					if(Turn>4)
+						Turn=1;
 				}
 			}
 		}
