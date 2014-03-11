@@ -9,6 +9,8 @@ public class Game_Main : MonoBehaviour {
 	public int[,] BanmenFlag2 = new int[8, 8];//盤面に置けるかどうかの判別用
 	public bool Sandwich=true;//盤面で挟み込めるような駒があるかどうかのフラグ
 	public GameObject[,] Stones = new GameObject[8, 8];
+	public int counter = 0;
+	public bool SetEnd=false;
 	public float Turn=1.0f;//ターン管理変数
 	// Use this for initialization
 	//盤面の初期化を行います
@@ -56,14 +58,14 @@ public class Game_Main : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		Set_Stone ();
+		TurnRote ();
 	}
 	void Reverse(int X,int Y,int BECOLOR)
 	{
 		Stone stonescript = Stones[X,Y].GetComponent<Stone>();
 		stonescript.Becolor = BECOLOR;
-		stonescript.Nowcolor = BECOLOR;
-		//stonescript.rollTrigger = true;
-		//stonescript.colorChanged = false;
+		stonescript.rollTrigger = true;
+		stonescript.counter = 0;
 		Banmen [X, Y] = BECOLOR;
 	}
 	void Checking(int X,int Y, float Color)
@@ -74,7 +76,7 @@ public class Game_Main : MonoBehaviour {
 			int y=Y;
 			switch (direction) {
 			case 1:
-				if(x-1>=0&&y+1<8)
+				if(x-1>=0&&y+1<=7)
 				{
 				if(Banmen[x-1,y+1]==0||Banmen[x-1,y+1]==(int)Color)
 				{
@@ -82,13 +84,13 @@ public class Game_Main : MonoBehaviour {
 				}
 				else
 				{
-					while(x-1>=0&&y+1<8)
+					while(x-1>=0&&y+1<=7)
 					{
 						x=x-1;
 						y=y+1;
 						if(Banmen[x,y]==(int)Color)
 						{
-							if(Banmen[x+1,y-1]!=(int)Color||Banmen[x+1,y-1]!=0)
+							if(Banmen[x+1,y-1]!=(int)Color&&Banmen[x+1,y-1]!=0)
 							{
 								BanmenFlag[X,Y]=1;
 								break;
@@ -116,7 +118,7 @@ public class Game_Main : MonoBehaviour {
 							y=y+1;
 							if(Banmen[x,y]==(int)Color)
 							{
-								if(Banmen[x,y-1]!=(int)Color||Banmen[x,y-1]!=0)
+								if(Banmen[x,y-1]!=(int)Color&&Banmen[x,y-1]!=0)
 								{
 									BanmenFlag[X,Y]=1;
 									break;
@@ -145,7 +147,7 @@ public class Game_Main : MonoBehaviour {
 							y=y+1;
 							if(Banmen[x,y]==(int)Color)
 							{
-								if(Banmen[x-1,y-1]!=(int)Color||Banmen[x-1,y-1]!=0)
+								if(Banmen[x-1,y-1]!=(int)Color&&Banmen[x-1,y-1]!=0)
 								{
 									BanmenFlag[X,Y]=1;
 									break;
@@ -173,7 +175,7 @@ public class Game_Main : MonoBehaviour {
 							x=x-1;
 							if(Banmen[x,y]==(int)Color)
 							{
-								if(Banmen[x+1,y]!=(int)Color||Banmen[x+1,y]!=0)
+								if(Banmen[x+1,y]!=(int)Color&&Banmen[x+1,y]!=0)
 								{
 									BanmenFlag[X,Y]=1;
 									break;
@@ -203,7 +205,7 @@ public class Game_Main : MonoBehaviour {
 							x=x+1;
 							if(Banmen[x,y]==(int)Color)
 							{
-								if(Banmen[x-1,y]!=(int)Color||Banmen[x-1,y]!=0)
+								if(Banmen[x-1,y]!=(int)Color&&Banmen[x-1,y]!=0)
 								{
 									BanmenFlag[X,Y]=1;
 									break;
@@ -232,7 +234,7 @@ public class Game_Main : MonoBehaviour {
 							y=y-1;
 							if(Banmen[x,y]==(int)Color)
 							{
-								if(Banmen[x+1,y+1]!=(int)Color||Banmen[x+1,y+1]!=0)
+								if(Banmen[x+1,y+1]!=(int)Color&&Banmen[x+1,y+1]!=0)
 								{
 									BanmenFlag[X,Y]=1;
 									break;
@@ -260,7 +262,7 @@ public class Game_Main : MonoBehaviour {
 							y=y-1;
 							if(Banmen[x,y]==(int)Color)
 							{
-								if(Banmen[x,y+1]!=(int)Color||Banmen[x,y+1]!=0)
+								if(Banmen[x,y+1]!=(int)Color&&Banmen[x,y+1]!=0)
 								{
 									BanmenFlag[X,Y]=1;
 									break;
@@ -289,7 +291,7 @@ public class Game_Main : MonoBehaviour {
 							y=y-1;
 							if(Banmen[x,y]==(int)Color)
 							{
-								if(Banmen[x-1,y+1]!=(int)Color||Banmen[x-1,y+1]!=0)
+								if(Banmen[x-1,y+1]!=(int)Color&&Banmen[x-1,y+1]!=0)
 								{
 									BanmenFlag[X,Y]=1;
 									break;
@@ -642,7 +644,7 @@ public class Game_Main : MonoBehaviour {
 							switch(direction)
 							{
 							case 1:
-								if(i>0&&j<7)
+								if(i-1>=0&&j+1<=7)
 								{
 									if(Banmen[i-1,j+1]==0)
 									{
@@ -651,7 +653,7 @@ public class Game_Main : MonoBehaviour {
 								}
 								break;
 							case 2:
-								if(j<7)
+								if(j+1<=7)
 								{
 									if(Banmen[i,j+1]==0)
 									{
@@ -660,7 +662,7 @@ public class Game_Main : MonoBehaviour {
 								}
 								break;
 							case 3:
-								if(i<7&&j<7)
+								if(i+1<=7&&j+1<=7)
 								{
 									if(Banmen[i+1,j+1]==0)
 									{
@@ -669,7 +671,7 @@ public class Game_Main : MonoBehaviour {
 								}
 								break;
 							case 4:
-								if(i>0)
+								if(i-1>=0)
 								{
 									if(Banmen[i-1,j]==0)
 									{
@@ -680,7 +682,7 @@ public class Game_Main : MonoBehaviour {
 							case 5:
 								break;
 							case 6:
-								if(i<7)
+								if(i+1<=7)
 								{
 									if(Banmen[i+1,j]==0)
 									{
@@ -689,7 +691,7 @@ public class Game_Main : MonoBehaviour {
 								}
 								break;
 							case 7:
-								if(i>0&&j>0)
+								if(i-1>=0&&j-1>=0)
 								{
 									if(Banmen[i-1,j-1]==0)
 									{
@@ -698,7 +700,7 @@ public class Game_Main : MonoBehaviour {
 								}
 								break;
 							case 8:
-								if(j>0)
+								if(j-1>=0)
 								{
 									if(Banmen[i,j-1]==0)
 									{
@@ -707,7 +709,7 @@ public class Game_Main : MonoBehaviour {
 								}
 								break;
 							case 9:
-								if(i<7&&j>0)
+								if(i+1<=7&&j-1>=0)
 								{
 									if(Banmen[i+1,j-1]==0)
 									{
@@ -724,6 +726,21 @@ public class Game_Main : MonoBehaviour {
 			}
 				}
 	}
+	void TurnRote()
+	{
+		if (SetEnd == true)
+		{
+			counter++;
+			if(counter>=60)
+			{
+				Turn++;
+				if(Turn>4)
+					Turn=1.0f;
+				Turn_Change();
+				SetEnd=false;
+			}
+		}
+	}
 	void Set_Stone()
 	{
 		Vector3 vec = Input.mousePosition;
@@ -736,43 +753,40 @@ public class Game_Main : MonoBehaviour {
 		int Board_X = (int)(Math.Floor ((vec.x + 18+2.65)) / 5.1);
 		int Board_Y = (int)(Math.Floor ((vec.y - 23.5-2.55)) / 5.1 * -1);
 		if (Input.GetMouseButtonDown (0)) {
-			if(Sandwich==true)
+			if(SetEnd==false)
 			{
-				if(Board_X>=0&&Board_X<=7&&Board_Y>=0&&Board_Y<=7)
+				if(Sandwich==true)
 				{
-					if(Banmen[Board_X,Board_Y]==0&&BanmenFlag[Board_X,Board_Y]==1)
+					if(Board_X>=0&&Board_X<=7&&Board_Y>=0&&Board_Y<=7)
 					{
-						Pos.x=Pos.x+(5.1f*Board_X);
-						Pos.y=Pos.y-(5.1f*Board_Y);
-						RollCheck(Board_X,Board_Y,Turn);
-						Stones[Board_X,Board_Y]=Instantiate (this.P_STONE, Pos, Quaternion.identity) as GameObject;
-						Stone stonescript = Stones[Board_X,Board_Y].GetComponent<Stone>();
-						stonescript.Init(Turn);
-						Banmen[Board_X,Board_Y]=(int)Turn;
-						Turn++;
-						if(Turn>4)
-							Turn=1.0f;
-						Turn_Change();
+						if(Banmen[Board_X,Board_Y]==0&&BanmenFlag[Board_X,Board_Y]==1)
+						{
+							Pos.x=Pos.x+(5.1f*Board_X);
+							Pos.y=Pos.y-(5.1f*Board_Y);
+							RollCheck(Board_X,Board_Y,Turn);
+							Stones[Board_X,Board_Y]=Instantiate (this.P_STONE, Pos, Quaternion.identity) as GameObject;
+							Stone stonescript = Stones[Board_X,Board_Y].GetComponent<Stone>();
+							stonescript.Init(Turn);
+							Banmen[Board_X,Board_Y]=(int)Turn;
+							SetEnd=true;
+						}
 					}
 				}
-			}
-			else if(Sandwich==false)
-			{
-				if(Board_X>=0&&Board_X<=7&&Board_Y>=0&&Board_Y<=7)
+				else if(Sandwich==false)
 				{
-					if(Banmen[Board_X,Board_Y]==0&&BanmenFlag2[Board_X,Board_Y]==1)
+					if(Board_X>=0&&Board_X<=7&&Board_Y>=0&&Board_Y<=7)
 					{
-						Pos.x=Pos.x+(5.1f*Board_X);
-						Pos.y=Pos.y-(5.1f*Board_Y);
-						RollCheck(Board_X,Board_Y,Turn);
-						Stones[Board_X,Board_Y]=Instantiate (this.P_STONE, Pos, Quaternion.identity) as GameObject;
-						Stone stonescript = Stones[Board_X,Board_Y].GetComponent<Stone>();
-						stonescript.Init(Turn);
-						Banmen[Board_X,Board_Y]=(int)Turn;
-						Turn++;
-						if(Turn>4)
-							Turn=1.0f;
-						Turn_Change();
+						if(Banmen[Board_X,Board_Y]==0&&BanmenFlag2[Board_X,Board_Y]==1)
+						{
+							Pos.x=Pos.x+(5.1f*Board_X);
+							Pos.y=Pos.y-(5.1f*Board_Y);
+							RollCheck(Board_X,Board_Y,Turn);
+							Stones[Board_X,Board_Y]=Instantiate (this.P_STONE, Pos, Quaternion.identity) as GameObject;
+							Stone stonescript = Stones[Board_X,Board_Y].GetComponent<Stone>();
+							stonescript.Init(Turn);
+							Banmen[Board_X,Board_Y]=(int)Turn;
+							SetEnd=true;
+						}
 					}
 				}
 			}
