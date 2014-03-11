@@ -46,7 +46,6 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Script\Cursor.cs" />
      <Compile Include="Assets\Script\Game_Main.cs" />
      <Compile Include="Assets\Script\Panel_Back.cs" />
      <Compile Include="Assets\Script\Stone.cs" />
