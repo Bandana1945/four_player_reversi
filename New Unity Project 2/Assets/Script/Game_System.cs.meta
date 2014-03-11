@@ -1,0 +1,10 @@
+fileFormatVersion: 2
+guid: 0b4961e51e64d574aadd17016c73393d
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences:
+  - P_STONE: {fileID: 100000, guid: 79ec233ccdc87fd4cbf877481b639157, type: 2}
+  - P_CURSOR: {fileID: 100000, guid: 937b3bed325ca4d4aaf274a492997502, type: 2}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
