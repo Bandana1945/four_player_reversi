@@ -76,233 +76,229 @@ public class Game_Main : MonoBehaviour {
 			int y=Y;
 			switch (direction) {
 			case 1:
-				if(x-1>=0&&y+1<=7)
-				{
-				if(Banmen[x-1,y+1]==0||Banmen[x-1,y+1]==(int)Color)
+				x--;
+				y++;
+				if(x<0||x>7||y<0||y>7)
 				{
 					break;
 				}
-				else
+				if(Banmen[X,Y]==0&&Banmen[x,y]!=(int)Color&&Banmen[x,y]!=0)
 				{
-					while(x-1>=0&&y+1<=7)
+					while(x>0&&y<7)
 					{
-						x=x-1;
-						y=y+1;
-						if(Banmen[x,y]==(int)Color)
-						{
-							if(Banmen[x+1,y-1]!=(int)Color&&Banmen[x+1,y-1]!=0)
-							{
-								BanmenFlag[X,Y]=1;
-								break;
-							}
-						}
+						x--;
+						y++;
 						if(Banmen[x,y]==0)
-							{
-								break;
-							}
+						{
+							break;
+						}
+						else if(Banmen[x,y]==(int)Color)
+						{
+							BanmenFlag[X,Y]=1;
+							break;
+						}
 					}
 				}
+				else
+				{
+					break;
 				}
 				break;
 			case 2:
-				if(y+1<8)
+				y++;
+				if(x<0||x>7||y<0||y>7)
 				{
-					if(Banmen[x,y+1]==0||Banmen[x,y+1]==(int)Color)
+					break;
+				}
+				if(Banmen[X,Y]==0&&Banmen[x,y]!=(int)Color&&Banmen[y,y]!=0)
+				{
+					while(y<7)
 					{
-						break;
-					}
-					else
-					{
-						while(y+1<8)
+						y++;
+						if(Banmen[x,y]==0)
 						{
-							y=y+1;
-							if(Banmen[x,y]==(int)Color)
-							{
-								if(Banmen[x,y-1]!=(int)Color&&Banmen[x,y-1]!=0)
-								{
-									BanmenFlag[X,Y]=1;
-									break;
-								}
-							}
-							if(Banmen[x,y]==0)
-							{
-								break;
-							}
+							break;
+						}
+						else if(Banmen[x,y]==(int)Color)
+						{
+							BanmenFlag[X,Y]=1;
+							break;
 						}
 					}
+				}
+				else
+				{
+					break;
 				}
 				break;
 			case 3:
-				if(x+1<8&&y+1<8)
+				x++;
+				y++;
+				if(x<0||x>7||y<0||y>7)
 				{
-					if(Banmen[x+1,y+1]==0||Banmen[x+1,y+1]==(int)Color)
+					break;
+				}
+				if(Banmen[X,Y]==0&&Banmen[x,y]!=(int)Color&&Banmen[x,y]!=0)
+				{
+					while(x<7&&y<7)
 					{
-						break;
-					}
-					else
-					{
-						while(x+1<8&&y+1<8)
+						x++;
+						y++;
+						if(Banmen[x,y]==0)
 						{
-							x=x+1;
-							y=y+1;
-							if(Banmen[x,y]==(int)Color)
-							{
-								if(Banmen[x-1,y-1]!=(int)Color&&Banmen[x-1,y-1]!=0)
-								{
-									BanmenFlag[X,Y]=1;
-									break;
-								}
-							}
-							if(Banmen[x,y]==0)
-							{
-								break;
-							}
+							break;
+						}
+						else if(Banmen[x,y]==(int)Color)
+						{
+							BanmenFlag[X,Y]=1;
+							break;
 						}
 					}
 				}
+				else
+				{
+					break;
+				}
 				break;
 			case 4:
-				if(x-1>=0)
+				x--;
+				if(x<0||x>7||y<0||y>7)
 				{
-					if(Banmen[x-1,y]==0||Banmen[x-1,y]==(int)Color)
+					break;
+				}
+				if(Banmen[X,Y]==0&&Banmen[x,y]!=(int)Color&&Banmen[x,y]!=0)
+				{
+					while(x>0)
 					{
-						break;
-					}
-					else
-					{
-						while(x-1>=0)
+						x--;
+						if(Banmen[x,y]==0)
 						{
-							x=x-1;
-							if(Banmen[x,y]==(int)Color)
-							{
-								if(Banmen[x+1,y]!=(int)Color&&Banmen[x+1,y]!=0)
-								{
-									BanmenFlag[X,Y]=1;
-									break;
-								}
-							}
-							if(Banmen[x,y]==0)
-							{
-								break;
-							}
+							break;
+						}
+						else if(Banmen[x,y]==(int)Color)
+						{
+							BanmenFlag[X,Y]=1;
+							break;
 						}
 					}
+				}
+				else
+				{
+					break;
 				}
 				break;
 			case 5:
 				break;
 			case 6:
-				if(x+1<8)
+				x++;
+				if(x<0||x>7||y<0||y>7)
 				{
-					if(Banmen[x+1,y]==0||Banmen[x+1,y]==(int)Color)
+					break;
+				}
+				if(Banmen[X,Y]==0&&Banmen[x,y]!=(int)Color&&Banmen[x,y]!=0)
+				{
+					while(x<7)
 					{
-						break;
-					}
-					else
-					{
-						while(x+1<8)
+						x++;
+						if(Banmen[x,y]==0)
 						{
-							x=x+1;
-							if(Banmen[x,y]==(int)Color)
-							{
-								if(Banmen[x-1,y]!=(int)Color&&Banmen[x-1,y]!=0)
-								{
-									BanmenFlag[X,Y]=1;
-									break;
-								}
-							}
-							if(Banmen[x,y]==0)
-							{
-								break;
-							}
+							break;
+						}
+						else if(Banmen[x,y]==(int)Color)
+						{
+							BanmenFlag[X,Y]=1;
+							break;
 						}
 					}
+				}
+				else
+				{
+					break;
 				}
 				break;
 			case 7:
-				if(x-1>=0&&y-1>=0)
+				x--;
+				y--;
+				if(x<0||x>7||y<0||y>7)
 				{
-					if(Banmen[x-1,y-1]==0||Banmen[x-1,y-1]==(int)Color)
+					break;
+				}
+				if(Banmen[X,Y]==0&&Banmen[x,y]!=(int)Color&&Banmen[x,y]!=0)
+				{
+					while(x>0&&y>0)
 					{
-						break;
-					}
-					else
-					{
-						while(x-1>=0&&y-1>=0)
+						x--;
+						y--;
+						if(Banmen[x,y]==0)
 						{
-							x=x-1;
-							y=y-1;
-							if(Banmen[x,y]==(int)Color)
-							{
-								if(Banmen[x+1,y+1]!=(int)Color&&Banmen[x+1,y+1]!=0)
-								{
-									BanmenFlag[X,Y]=1;
-									break;
-								}
-							}
-							if(Banmen[x,y]==0)
-							{
-								break;
-							}
+							break;
+						}
+						else if(Banmen[x,y]==(int)Color)
+						{
+							BanmenFlag[X,Y]=1;
+							break;
 						}
 					}
+				}
+				else
+				{
+					break;
 				}
 				break;
 			case 8:
-				if(y-1>=0)
+				y--;
+				if(x<0||x>7||y<0||y>7)
 				{
-					if(Banmen[x,y-1]==0||Banmen[x,y-1]==(int)Color)
+					break;
+				}
+				if(Banmen[X,Y]==0&&Banmen[x,y]!=(int)Color&&Banmen[x,y]!=0)
+				{
+					while(y>0)
 					{
-						break;
-					}
-					else
-					{
-						while(y-1>=0)
+						y--;
+						if(Banmen[x,y]==0)
 						{
-							y=y-1;
-							if(Banmen[x,y]==(int)Color)
-							{
-								if(Banmen[x,y+1]!=(int)Color&&Banmen[x,y+1]!=0)
-								{
-									BanmenFlag[X,Y]=1;
-									break;
-								}
-							}
-							if(Banmen[x,y]==0)
-							{
-								break;
-							}
+							break;
+						}
+						else if(Banmen[x,y]==(int)Color)
+						{
+							BanmenFlag[X,Y]=1;
+							break;
 						}
 					}
 				}
+				else
+				{
+					break;
+				}
 				break;
 			case 9:
-				if(x+1<8&&y-1>=0)
+				x++;
+				y--;
+				if(x<0||x>7||y<0||y>7)
 				{
-					if(Banmen[x+1,y-1]==0||Banmen[x+1,y-1]==(int)Color)
+					break;
+				}
+				if(Banmen[X,Y]==0&&Banmen[x,y]!=(int)Color&&Banmen[x,y]!=0)
+				{
+					while(x<7&&y>0)
 					{
-						break;
-					}
-					else
-					{
-						while(x+1<8&&y-1>=0)
+						x++;
+						y--;
+						if(Banmen[x,y]==0)
 						{
-							x=x+1;
-							y=y-1;
-							if(Banmen[x,y]==(int)Color)
-							{
-								if(Banmen[x-1,y+1]!=(int)Color&&Banmen[x-1,y+1]!=0)
-								{
-									BanmenFlag[X,Y]=1;
-									break;
-								}
-							}
-							if(Banmen[x,y]==0)
-							{
-								break;
-							}
+							break;
+						}
+						else if(Banmen[x,y]==(int)Color)
+						{
+							BanmenFlag[X,Y]=1;
+							break;
 						}
 					}
+				}
+				else
+				{
+					break;
 				}
 				break;
 			default:
