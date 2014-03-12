@@ -4,10 +4,12 @@ using System;
 
 public class Game_Main : MonoBehaviour {
 	public GameObject P_STONE;
+	public GameObject P_CURSOR;
 	public int[,] Banmen = new int[8, 8];
 	public int[,] BanmenFlag = new int[8, 8];//盤面に置けるかどうかの判別用
 	public int[,] BanmenFlag2 = new int[8, 8];//盤面に置けるかどうかの判別用
 	public bool Sandwich=true;//盤面で挟み込めるような駒があるかどうかのフラグ
+	public GameObject[] Target;
 	public GameObject[,] Stones = new GameObject[8, 8];
 	public int counter = 0;
 	public bool SetEnd=false;
@@ -71,9 +73,14 @@ public class Game_Main : MonoBehaviour {
 	void Checking(int X,int Y, float Color)
 	{
 		int direction;
+		Vector3 Pos;
+		GameObject obj;
 		for (direction=1; direction<10; direction++) {
 			int x=X;
 			int y=Y;
+			Pos.x = -18.0f;
+			Pos.y = 23.5f;;
+			Pos.z = 0.0f;
 			switch (direction) {
 			case 1:
 				x--;
@@ -94,6 +101,9 @@ public class Game_Main : MonoBehaviour {
 						}
 						else if(Banmen[x,y]==(int)Color)
 						{
+							Pos.x=Pos.x+(5.1f*X);
+							Pos.y=Pos.y-(5.1f*Y);
+							obj=Instantiate (this.P_CURSOR, Pos, Quaternion.identity) as GameObject;
 							BanmenFlag[X,Y]=1;
 							break;
 						}
@@ -110,7 +120,7 @@ public class Game_Main : MonoBehaviour {
 				{
 					break;
 				}
-				if(Banmen[X,Y]==0&&Banmen[x,y]!=(int)Color&&Banmen[y,y]!=0)
+				if(Banmen[X,Y]==0&&Banmen[x,y]!=(int)Color&&Banmen[x,y]!=0)
 				{
 					while(y<7)
 					{
@@ -121,6 +131,9 @@ public class Game_Main : MonoBehaviour {
 						}
 						else if(Banmen[x,y]==(int)Color)
 						{
+							Pos.x=Pos.x+(5.1f*X);
+							Pos.y=Pos.y-(5.1f*Y);
+							obj=Instantiate (this.P_CURSOR, Pos, Quaternion.identity) as GameObject;
 							BanmenFlag[X,Y]=1;
 							break;
 						}
@@ -150,6 +163,9 @@ public class Game_Main : MonoBehaviour {
 						}
 						else if(Banmen[x,y]==(int)Color)
 						{
+							Pos.x=Pos.x+(5.1f*X);
+							Pos.y=Pos.y-(5.1f*Y);
+							obj=Instantiate (this.P_CURSOR, Pos, Quaternion.identity) as GameObject;
 							BanmenFlag[X,Y]=1;
 							break;
 						}
@@ -177,6 +193,9 @@ public class Game_Main : MonoBehaviour {
 						}
 						else if(Banmen[x,y]==(int)Color)
 						{
+							Pos.x=Pos.x+(5.1f*X);
+							Pos.y=Pos.y-(5.1f*Y);
+							obj=Instantiate (this.P_CURSOR, Pos, Quaternion.identity) as GameObject;
 							BanmenFlag[X,Y]=1;
 							break;
 						}
@@ -206,6 +225,9 @@ public class Game_Main : MonoBehaviour {
 						}
 						else if(Banmen[x,y]==(int)Color)
 						{
+							Pos.x=Pos.x+(5.1f*X);
+							Pos.y=Pos.y-(5.1f*Y);
+							obj=Instantiate (this.P_CURSOR, Pos, Quaternion.identity) as GameObject;
 							BanmenFlag[X,Y]=1;
 							break;
 						}
@@ -235,6 +257,9 @@ public class Game_Main : MonoBehaviour {
 						}
 						else if(Banmen[x,y]==(int)Color)
 						{
+							Pos.x=Pos.x+(5.1f*X);
+							Pos.y=Pos.y-(5.1f*Y);
+							obj=Instantiate (this.P_CURSOR, Pos, Quaternion.identity) as GameObject;
 							BanmenFlag[X,Y]=1;
 							break;
 						}
@@ -262,6 +287,9 @@ public class Game_Main : MonoBehaviour {
 						}
 						else if(Banmen[x,y]==(int)Color)
 						{
+							Pos.x=Pos.x+(5.1f*X);
+							Pos.y=Pos.y-(5.1f*Y);
+							obj=Instantiate (this.P_CURSOR, Pos, Quaternion.identity) as GameObject;
 							BanmenFlag[X,Y]=1;
 							break;
 						}
@@ -291,6 +319,9 @@ public class Game_Main : MonoBehaviour {
 						}
 						else if(Banmen[x,y]==(int)Color)
 						{
+							Pos.x=Pos.x+(5.1f*X);
+							Pos.y=Pos.y-(5.1f*Y);
+							obj=Instantiate (this.P_CURSOR, Pos, Quaternion.identity) as GameObject;
 							BanmenFlag[X,Y]=1;
 							break;
 						}
@@ -629,6 +660,11 @@ public class Game_Main : MonoBehaviour {
 				}
 		if (counter == 0) {
 			Sandwich=false;
+			GameObject obj;
+			Vector3 Pos;
+			Pos.x = -18.0f;
+			Pos.y = 23.5f;;
+			Pos.z = 0.0f;
 			for(int i=0;i<8;i++)
 			{
 				for(int j=0;j<8;j++)
@@ -637,6 +673,8 @@ public class Game_Main : MonoBehaviour {
 					{
 						for(int direction=1;direction<10;direction++)
 						{
+							Pos.x = -18.0f;
+							Pos.y = 23.5f;;
 							switch(direction)
 							{
 							case 1:
@@ -644,6 +682,9 @@ public class Game_Main : MonoBehaviour {
 								{
 									if(Banmen[i-1,j+1]==0)
 									{
+										Pos.x=Pos.x+(5.1f*(i-1));
+										Pos.y=Pos.y-(5.1f*(j+1));
+										obj=Instantiate (this.P_CURSOR, Pos, Quaternion.identity) as GameObject;
 										BanmenFlag2[i-1,j+1]=1;
 									}
 								}
@@ -653,6 +694,9 @@ public class Game_Main : MonoBehaviour {
 								{
 									if(Banmen[i,j+1]==0)
 									{
+										Pos.x=Pos.x+(5.1f*(i));
+										Pos.y=Pos.y-(5.1f*(j+1));
+										obj=Instantiate (this.P_CURSOR, Pos, Quaternion.identity) as GameObject;
 										BanmenFlag2[i,j+1]=1;
 									}
 								}
@@ -662,6 +706,9 @@ public class Game_Main : MonoBehaviour {
 								{
 									if(Banmen[i+1,j+1]==0)
 									{
+										Pos.x=Pos.x+(5.1f*(i+1));
+										Pos.y=Pos.y-(5.1f*(j+1));
+										obj=Instantiate (this.P_CURSOR, Pos, Quaternion.identity) as GameObject;
 										BanmenFlag2[i+1,j+1]=1;
 									}
 								}
@@ -671,6 +718,9 @@ public class Game_Main : MonoBehaviour {
 								{
 									if(Banmen[i-1,j]==0)
 									{
+										Pos.x=Pos.x+(5.1f*(i-1));
+										Pos.y=Pos.y-(5.1f*(j));
+										obj=Instantiate (this.P_CURSOR, Pos, Quaternion.identity) as GameObject;
 										BanmenFlag2[i-1,j]=1;
 									}
 								}
@@ -682,6 +732,9 @@ public class Game_Main : MonoBehaviour {
 								{
 									if(Banmen[i+1,j]==0)
 									{
+										Pos.x=Pos.x+(5.1f*(i+1));
+										Pos.y=Pos.y-(5.1f*(j));
+										obj=Instantiate (this.P_CURSOR, Pos, Quaternion.identity) as GameObject;
 										BanmenFlag2[i+1,j]=1;
 									}
 								}
@@ -691,6 +744,9 @@ public class Game_Main : MonoBehaviour {
 								{
 									if(Banmen[i-1,j-1]==0)
 									{
+										Pos.x=Pos.x+(5.1f*(i-1));
+										Pos.y=Pos.y-(5.1f*(j-1));
+										obj=Instantiate (this.P_CURSOR, Pos, Quaternion.identity) as GameObject;
 										BanmenFlag2[i-1,j-1]=1;
 									}
 								}
@@ -700,6 +756,9 @@ public class Game_Main : MonoBehaviour {
 								{
 									if(Banmen[i,j-1]==0)
 									{
+										Pos.x=Pos.x+(5.1f*(i));
+										Pos.y=Pos.y-(5.1f*(j-1));
+										obj=Instantiate (this.P_CURSOR, Pos, Quaternion.identity) as GameObject;
 										BanmenFlag2[i,j-1]=1;
 									}
 								}
@@ -709,6 +768,9 @@ public class Game_Main : MonoBehaviour {
 								{
 									if(Banmen[i+1,j-1]==0)
 									{
+										Pos.x=Pos.x+(5.1f*(i+1));
+										Pos.y=Pos.y-(5.1f*(j-1));
+										obj=Instantiate (this.P_CURSOR, Pos, Quaternion.identity) as GameObject;
 										BanmenFlag2[i+1,j-1]=1;
 									}
 								}
@@ -729,6 +791,7 @@ public class Game_Main : MonoBehaviour {
 			counter++;
 			if(counter>=60)
 			{
+				counter=0;
 				Turn++;
 				if(Turn>4)
 					Turn=1.0f;
@@ -764,8 +827,14 @@ public class Game_Main : MonoBehaviour {
 							Stone stonescript = Stones[Board_X,Board_Y].GetComponent<Stone>();
 							stonescript.Init(Turn);
 							Banmen[Board_X,Board_Y]=(int)Turn;
+							Target=GameObject.FindGameObjectsWithTag("Cursor");
+							foreach(GameObject obj in Target)
+							{
+								GameObject.Destroy(obj);
+							}
 							SetEnd=true;
 						}
+
 					}
 				}
 				else if(Sandwich==false)
@@ -781,6 +850,12 @@ public class Game_Main : MonoBehaviour {
 							Stone stonescript = Stones[Board_X,Board_Y].GetComponent<Stone>();
 							stonescript.Init(Turn);
 							Banmen[Board_X,Board_Y]=(int)Turn;
+							SetEnd=true;
+							Target=GameObject.FindGameObjectsWithTag("Cursor");
+							foreach(GameObject obj in Target)
+							{
+								GameObject.Destroy(obj);
+							}
 							SetEnd=true;
 						}
 					}
