@@ -1,0 +1,13 @@
+fileFormatVersion: 2
+guid: 180b5aaa53e477347a8b20abe75f5142
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences:
+  - BOTTOMS: {fileID: 100000, guid: 5b97ab454e379eb4e804b57568b25acd, type: 2}
+  - TOPS: {fileID: 100000, guid: 7933d3daaaf906a4397ad4f8548f07c9, type: 2}
+  - FACE: {fileID: 100000, guid: 31d77739615ad9649aa93c88fcdd84da, type: 2}
+  - HAIR_F: {fileID: 100000, guid: 2be7d84187b70cf4a95eae6823a2346e, type: 2}
+  - HAIR_B: {fileID: 100000, guid: 1d31348434bcbc941899c51fbed514a3, type: 2}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 

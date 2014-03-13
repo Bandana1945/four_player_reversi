@@ -46,6 +46,12 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Script\Avat\Bottoms.cs" />
+     <Compile Include="Assets\Script\Avat\Face.cs" />
+     <Compile Include="Assets\Script\Avat\HairB.cs" />
+     <Compile Include="Assets\Script\Avat\HairF.cs" />
+     <Compile Include="Assets\Script\Avat\Tops.cs" />
+     <Compile Include="Assets\Script\Avater.cs" />
      <Compile Include="Assets\Script\Cursor.cs" />
      <Compile Include="Assets\Script\Game_Main.cs" />
      <Compile Include="Assets\Script\Panel_Back.cs" />

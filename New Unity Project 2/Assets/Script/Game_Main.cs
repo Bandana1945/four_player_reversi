@@ -9,10 +9,12 @@ public class Game_Main : MonoBehaviour {
 	public int[,] BanmenFlag = new int[8, 8];//盤面に置けるかどうかの判別用
 	public int[,] BanmenFlag2 = new int[8, 8];//盤面に置けるかどうかの判別用
 	public bool Sandwich=true;//盤面で挟み込めるような駒があるかどうかのフラグ
+	public bool InterSepting=false;
 	public GameObject[] Target;
 	public GameObject[,] Stones = new GameObject[8, 8];
 	public int counter = 0;
 	public bool SetEnd=false;
+	public int[] CanIntersept=new int[4];
 	public float Turn=1.0f;//ターン管理変数
 	// Use this for initialization
 	//盤面の初期化を行います
@@ -27,6 +29,10 @@ public class Game_Main : MonoBehaviour {
 				BanmenFlag2[i,j]=0;
 			}
 		}
+		CanIntersept[0] = 1;
+		CanIntersept[1] = 1;
+		CanIntersept[2] = 1;
+		CanIntersept[3] = 1;
 		Vector3 Pos;
 		Pos.x = -2.7f;
 		Pos.y = 8.2f;
@@ -53,7 +59,58 @@ public class Game_Main : MonoBehaviour {
 		stonescript = Stones[3,4].GetComponent<Stone>();
 		Banmen [3, 4] = 1;
 		stonescript.Init(1);
+		AvaterSet ();
 		FieldCheck (1.0f);
+	}
+	void Intersept()
+	{
+		Vector3 Pos;
+		GameObject obj;
+		InterSepting = true;
+		Target=GameObject.FindGameObjectsWithTag("Cursor");
+		foreach(GameObject target in Target)
+		{
+			GameObject.Destroy(target);
+		}
+		for (int i=0; i<8; i++) 
+		{
+			for (int j=0; j<8; j++) 
+			{
+				Pos.x = -18.0f;
+				Pos.y = 23.5f;
+				Pos.z = 0.0f;
+				BanmenFlag [i, j] = 0;
+				BanmenFlag2 [i, j] = 0;
+				if (Banmen [i, j] != 0 && Banmen [i, j] != (int)Turn) 
+					{
+						Pos.x = Pos.x + (5.1f * i);
+						Pos.y = Pos.y - (5.1f * j);
+						obj = Instantiate (this.P_CURSOR, Pos, Quaternion.identity) as GameObject;
+					}
+			}		
+		}
+	}
+	void AvaterSet()
+	{
+		for (int i=0; i<4; i++) {
+			switch(i)
+			{
+			case 0:
+				GetComponent<Avater>().Init(i,0,0,0,0);
+				break;
+			case 1:
+				GetComponent<Avater>().Init(i,1,1,1,1);
+				break;
+			case 2:
+				GetComponent<Avater>().Init(i,1,0,0,1);
+				break;
+			case 3:
+				GetComponent<Avater>().Init(i,0,1,1,0);
+				break;
+			default:
+				break;
+			}
+				}
 	}
 
 	
@@ -796,6 +853,7 @@ public class Game_Main : MonoBehaviour {
 				if(Turn>4)
 					Turn=1.0f;
 				Turn_Change();
+				GetComponent<Avater>().Turn=Turn;
 				SetEnd=false;
 			}
 		}
@@ -809,8 +867,8 @@ public class Game_Main : MonoBehaviour {
 		Pos.x = -18.0f;
 		Pos.y = 23.5f;
 		Pos.z = 0.0f;
-		int Board_X = (int)(Math.Floor ((vec.x + 18+2.65)) / 5.1);
-		int Board_Y = (int)(Math.Floor ((vec.y - 23.5-2.55)) / 5.1 * -1);
+		int Board_X = (int)(Math.Floor ((vec.x + 18+2.65) / 5.1));
+		int Board_Y = (int)(Math.Floor ((vec.y - 23.5-2.55) / 5.1 * -1));
 		if (Input.GetMouseButtonDown (0)) {
 			if(SetEnd==false)
 			{
@@ -820,6 +878,8 @@ public class Game_Main : MonoBehaviour {
 					{
 						if(Banmen[Board_X,Board_Y]==0&&BanmenFlag[Board_X,Board_Y]==1)
 						{
+							if(InterSepting==false)
+							{
 							Pos.x=Pos.x+(5.1f*Board_X);
 							Pos.y=Pos.y-(5.1f*Board_Y);
 							RollCheck(Board_X,Board_Y,Turn);
@@ -833,8 +893,44 @@ public class Game_Main : MonoBehaviour {
 								GameObject.Destroy(obj);
 							}
 							SetEnd=true;
+							}
+						}
+						else if(Banmen[Board_X,Board_Y]!=0&&BanmenFlag[Board_X,Board_Y]!=(int)Turn)
+						{
+							if(InterSepting==true)
+							{
+							Pos.x=Pos.x+(5.1f*Board_X);
+							Pos.y=Pos.y-(5.1f*Board_Y);
+							Reverse(Board_X,Board_Y,(int)Turn);
+							Banmen[Board_X,Board_Y]=(int)Turn;
+							Target=GameObject.FindGameObjectsWithTag("Cursor");
+							foreach(GameObject obj in Target)
+							{
+								GameObject.Destroy(obj);
+							}
+							SetEnd=true;
+							InterSepting=false;
+							CanIntersept[(int)Turn-1]--;
+							}
 						}
 
+					}
+					else
+					{
+						if(InterSepting==false&&CanIntersept[(int)Turn-1]>0)
+						{
+							Intersept();
+						}
+						else if(InterSepting==true)
+						{
+							Target=GameObject.FindGameObjectsWithTag("Cursor");
+							foreach(GameObject target in Target)
+							{
+								GameObject.Destroy(target);
+							}
+							InterSepting=false;
+							Turn_Change();
+						}
 					}
 				}
 				else if(Sandwich==false)
@@ -857,6 +953,41 @@ public class Game_Main : MonoBehaviour {
 								GameObject.Destroy(obj);
 							}
 							SetEnd=true;
+						}
+						else if(Banmen[Board_X,Board_Y]!=0&&BanmenFlag[Board_X,Board_Y]!=(int)Turn)
+						{
+							if(InterSepting==true)
+							{
+								Pos.x=Pos.x+(5.1f*Board_X);
+								Pos.y=Pos.y-(5.1f*Board_Y);
+								Reverse(Board_X,Board_Y,(int)Turn);
+								Banmen[Board_X,Board_Y]=(int)Turn;
+								Target=GameObject.FindGameObjectsWithTag("Cursor");
+								foreach(GameObject obj in Target)
+								{
+									GameObject.Destroy(obj);
+								}
+								SetEnd=true;
+								CanIntersept[(int)Turn-1]--;
+								InterSepting=false;
+							}
+						}
+					}
+					else
+					{
+						if(InterSepting==false&&CanIntersept[(int)Turn-1]>0)
+						{
+							Intersept();
+						}
+						else if(InterSepting==true)
+						{
+							Target=GameObject.FindGameObjectsWithTag("Cursor");
+							foreach(GameObject target in Target)
+							{
+								GameObject.Destroy(target);
+							}
+							InterSepting=false;
+							Turn_Change();
 						}
 					}
 				}

@@ -13,7 +13,6 @@ public class Stone : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		animator = GetComponent<Animator>();
-
 	}
 	public void Init(float Color)
 	{
