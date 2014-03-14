@@ -29,7 +29,7 @@ public class Stone : MonoBehaviour {
 	{
 		if (rollTrigger == true) {
 			counter++;
-			if(counter>=13)
+			if(counter>=18)
 			{
 				counter=0;
 				Nowcolor=Becolor;

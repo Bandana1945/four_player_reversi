@@ -5,6 +5,7 @@ MonoImporter:
   defaultReferences:
   - P_STONE: {fileID: 100000, guid: 79ec233ccdc87fd4cbf877481b639157, type: 2}
   - P_CURSOR: {fileID: 100000, guid: aa0230350c7527d49831405db2967b14, type: 2}
+  - Cutin_Intercept: {fileID: 100000, guid: 988dc63c972455544ad64769c7061d40, type: 2}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

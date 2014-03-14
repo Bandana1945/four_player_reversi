@@ -12,10 +12,12 @@ public class Game_Main : MonoBehaviour {
 	public bool InterSepting=false;
 	public GameObject[] Target;
 	public GameObject[,] Stones = new GameObject[8, 8];
+	public GameObject Cutin_Intercept;
 	public int counter = 0;
 	public bool SetEnd=false;
 	public int[] CanIntersept=new int[4];
 	public float Turn=1.0f;//ターン管理変数
+	public bool Pause=false;
 	// Use this for initialization
 	//盤面の初期化を行います
 	//初期駒も四つ置きます
@@ -116,8 +118,10 @@ public class Game_Main : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		Set_Stone ();
-		TurnRote ();
+		if (Pause != true) {
+						Set_Stone ();
+						TurnRote ();
+				}
 	}
 	void Reverse(int X,int Y,int BECOLOR)
 	{
@@ -860,6 +864,7 @@ public class Game_Main : MonoBehaviour {
 	}
 	void Set_Stone()
 	{
+		GameObject CUTIN_INTERCEPT;
 		Vector3 vec = Input.mousePosition;
 		Vector3 Pos;
 		vec = camera.ScreenToWorldPoint (vec);
@@ -910,6 +915,7 @@ public class Game_Main : MonoBehaviour {
 							}
 							SetEnd=true;
 							InterSepting=false;
+							CUTIN_INTERCEPT=Instantiate(this.Cutin_Intercept,new Vector3(0,0,0),Quaternion.identity) as GameObject;
 							CanIntersept[(int)Turn-1]--;
 							}
 						}
@@ -969,6 +975,7 @@ public class Game_Main : MonoBehaviour {
 								}
 								SetEnd=true;
 								CanIntersept[(int)Turn-1]--;
+								CUTIN_INTERCEPT=Instantiate(this.Cutin_Intercept,new Vector3(0,0,0),Quaternion.identity) as GameObject;
 								InterSepting=false;
 							}
 						}
