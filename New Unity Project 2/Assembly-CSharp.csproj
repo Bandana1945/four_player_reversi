@@ -60,6 +60,7 @@
      <Compile Include="Assets\Script\UI\ResetButton.cs" />
      <Compile Include="Assets\Script\UI\Reset_No.cs" />
      <Compile Include="Assets\Script\UI\Reset_Yes.cs" />
+     <Compile Include="Assets\Script\UI\ScoreLabel.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

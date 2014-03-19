@@ -18,10 +18,47 @@ public class Game_Main : MonoBehaviour {
 	public int[] CanIntersept=new int[4];
 	public float Turn=1.0f;//ターン管理変数
 	public bool Pause=false;
+	public int RedScore=0;
+	public int YellowScore=0;
+	public int GreenScore=0;
+	public int BlueScore=0;
+	public GameObject Label_P1_0;
+	public GameObject Label_P1_1;
+	public GameObject Label_P2_0;
+	public GameObject Label_P2_1;
+	public GameObject Label_P3_0;
+	public GameObject Label_P3_1;
+	public GameObject Label_P4_0;
+	public GameObject Label_P4_1;
+	ScoreLabel LP1_0;
+	ScoreLabel LP1_1;
+	ScoreLabel LP2_0;
+	ScoreLabel LP2_1;
+	ScoreLabel LP3_0;
+	ScoreLabel LP3_1;
+	ScoreLabel LP4_0;
+	ScoreLabel LP4_1;
+
 	// Use this for initialization
 	//盤面の初期化を行います
 	//初期駒も四つ置きます
 	void Start () {
+		Label_P1_0 = GameObject.Find ("Label_P1_0");
+		Label_P1_1 = GameObject.Find ("Label_P1_1");
+		Label_P2_0 = GameObject.Find ("Label_P2_0");
+		Label_P2_1 = GameObject.Find ("Label_P2_1");
+		Label_P3_0 = GameObject.Find ("Label_P3_0");
+		Label_P3_1 = GameObject.Find ("Label_P3_1");
+		Label_P4_0 = GameObject.Find ("Label_P4_0");
+		Label_P4_1 = GameObject.Find ("Label_P4_1");
+		LP1_0 = Label_P1_0.GetComponent<ScoreLabel> ();
+		LP1_1 = Label_P1_1.GetComponent<ScoreLabel> ();
+		LP2_0 = Label_P2_0.GetComponent<ScoreLabel> ();
+		LP2_1 = Label_P2_1.GetComponent<ScoreLabel> ();
+		LP3_0 = Label_P3_0.GetComponent<ScoreLabel> ();
+		LP3_1 = Label_P3_1.GetComponent<ScoreLabel> ();
+		LP4_0 = Label_P4_0.GetComponent<ScoreLabel> ();
+		LP4_1 = Label_P4_1.GetComponent<ScoreLabel> ();
 		for(int i=0;i<8;i++)
 		{
 			for(int j=0;j<8;j++)
@@ -63,6 +100,91 @@ public class Game_Main : MonoBehaviour {
 		stonescript.Init(1);
 		AvaterSet ();
 		FieldCheck (1.0f);
+	}
+	void scoreCheck()
+	{
+		RedScore = 0;
+		YellowScore = 0;
+		GreenScore = 0;
+		BlueScore = 0;
+		for(int i=0;i<8;i++)
+		{
+			for(int j=0;j<8;j++)
+			{
+				switch(Banmen[i,j])
+				{
+				case 0:
+					break;
+				case 1:
+					RedScore++;
+					break;
+				case 2:
+					YellowScore++;
+					break;
+				case 3:
+					GreenScore++;
+					break;
+				case 4:
+					BlueScore++;
+					break;
+				default:
+					break;
+				}
+			}
+		}
+		for(int i=0;i<4;i++)
+		{
+			float Label1_Num=0;
+			float Label2_Num=0;
+			for(int j=0;j<4;j++)
+			{
+				switch(j)
+				{
+				case 0:
+					while(RedScore>10)
+					{
+						RedScore-=10;
+						Label2_Num++;
+					}
+					Label1_Num=(float)RedScore;
+					LP1_0.Num=Label1_Num;
+					LP1_1.Num=Label2_Num;
+					break;
+				case 1:
+					while(YellowScore>10)
+					{
+						YellowScore-=10;
+						Label2_Num++;
+					}
+					Label1_Num=(float)YellowScore;
+					LP2_0.Num=Label1_Num;
+					LP2_1.Num=Label2_Num;
+					break;
+				case 2:
+					while(GreenScore>10)
+					{
+						GreenScore-=10;
+						Label2_Num++;
+					}
+					Label1_Num=(float)GreenScore;
+					LP3_0.Num=Label1_Num;
+					LP3_1.Num=Label2_Num;
+					break;
+				case 3:
+					while(BlueScore>10)
+					{
+						BlueScore-=10;
+						Label2_Num++;
+					}
+					Label1_Num=(float)BlueScore;
+					LP4_0.Num=Label1_Num;
+					LP4_1.Num=Label2_Num;
+					break;
+				default:
+					break;
+				}
+			}
+		}
 	}
 	void Intersept()
 	{
@@ -122,6 +244,7 @@ public class Game_Main : MonoBehaviour {
 		if (Pause != true) {
 						Set_Stone ();
 						TurnRote ();
+			scoreCheck();
 			GetComponent<Avater>().Turn=Turn;
 				}
 	}
