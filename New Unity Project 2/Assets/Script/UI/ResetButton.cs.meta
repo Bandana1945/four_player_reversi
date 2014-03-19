@@ -1,0 +1,12 @@
+fileFormatVersion: 2
+guid: c6398f8e794104a4bb3a2a72d5c868aa
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences:
+  - ResetWindow_Back: {fileID: 100000, guid: 42c39feae15417f48a8256ff136d6525, type: 2}
+  - ResetWindow_Bun: {fileID: 100000, guid: d50ee55029286664099c7f24ec09fc83, type: 2}
+  - ResetWindow_Yes: {fileID: 100000, guid: 2e21c7ff2d17e3d4d8c905201716a203, type: 2}
+  - ResetWindow_No: {fileID: 100000, guid: 121371d25d0218048a01c0235ddf7f60, type: 2}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 

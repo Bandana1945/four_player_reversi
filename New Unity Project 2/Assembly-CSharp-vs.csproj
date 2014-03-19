@@ -57,6 +57,9 @@
      <Compile Include="Assets\Script\Game_Main.cs" />
      <Compile Include="Assets\Script\Panel_Back.cs" />
      <Compile Include="Assets\Script\Stone.cs" />
+     <Compile Include="Assets\Script\UI\ResetButton.cs" />
+     <Compile Include="Assets\Script\UI\Reset_No.cs" />
+     <Compile Include="Assets\Script\UI\Reset_Yes.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

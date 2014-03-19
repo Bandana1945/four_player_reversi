@@ -5,13 +5,16 @@ public class Cutin : MonoBehaviour {
 	public int count = 0;
 	public float Anim=0;
 	protected Animator animator;
+	GameObject Main;
 	// Use this for initialization
 	void Start () {
 		animator = GetComponent<Animator>();
+		Main=GameObject.FindGameObjectWithTag("MainCamera");
 	}
 	
 	// Update is called once per frame
 	void Update () {
+		Game_Main MainScript = Main.GetComponent<Game_Main> ();
 		animator.SetFloat("ANIM", Anim);
 		count++;
 		if (count > 0 && count <= 3) {

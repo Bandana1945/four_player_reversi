@@ -108,6 +108,7 @@ public class Game_Main : MonoBehaviour {
 				break;
 			case 3:
 				GetComponent<Avater>().Init(i,0,1,1,0);
+				GetComponent<Avater>().InitTrigger=true;
 				break;
 			default:
 				break;
@@ -121,6 +122,7 @@ public class Game_Main : MonoBehaviour {
 		if (Pause != true) {
 						Set_Stone ();
 						TurnRote ();
+			GetComponent<Avater>().Turn=Turn;
 				}
 	}
 	void Reverse(int X,int Y,int BECOLOR)
@@ -900,7 +902,7 @@ public class Game_Main : MonoBehaviour {
 							SetEnd=true;
 							}
 						}
-						else if(Banmen[Board_X,Board_Y]!=0&&BanmenFlag[Board_X,Board_Y]!=(int)Turn)
+						else if(Banmen[Board_X,Board_Y]!=0&&Banmen[Board_X,Board_Y]!=(int)Turn)
 						{
 							if(InterSepting==true)
 							{
@@ -923,7 +925,7 @@ public class Game_Main : MonoBehaviour {
 					}
 					else
 					{
-						if(InterSepting==false&&CanIntersept[(int)Turn-1]>0)
+						if(InterSepting==false&&CanIntersept[(int)Turn-1]>0&&vec.y>-30)
 						{
 							Intersept();
 						}
@@ -960,7 +962,7 @@ public class Game_Main : MonoBehaviour {
 							}
 							SetEnd=true;
 						}
-						else if(Banmen[Board_X,Board_Y]!=0&&BanmenFlag[Board_X,Board_Y]!=(int)Turn)
+						else if(Banmen[Board_X,Board_Y]!=0&&Banmen[Board_X,Board_Y]!=(int)Turn)
 						{
 							if(InterSepting==true)
 							{
@@ -982,7 +984,7 @@ public class Game_Main : MonoBehaviour {
 					}
 					else
 					{
-						if(InterSepting==false&&CanIntersept[(int)Turn-1]>0)
+						if(InterSepting==false&&CanIntersept[(int)Turn-1]>0&&vec.y>-30)
 						{
 							Intersept();
 						}

@@ -7,12 +7,14 @@ public class Stone : MonoBehaviour {
 	public bool rollTrigger=false;//まわりはじめふらぐ
 	public bool colorChanged=false;//アニメーションで一つだけ全色共通のコマがあり そのコマになった時に色判定を変更します
 	public int counter=0;
+	Game_Main MainScript;
 	//これはその色判定の変更を司るフラグです
 	protected Animator animator;
 	//Animatorに数値を渡したいのでおまじないをば
 	// Use this for initialization
 	void Start () {
 		animator = GetComponent<Animator>();
+		MainScript=GameObject.Find("Main Camera").GetComponent<Game_Main>();
 	}
 	public void Init(float Color)
 	{
@@ -20,10 +22,13 @@ public class Stone : MonoBehaviour {
 	}
 	// Update is called once per frame
 	void Update () {
+		if(MainScript.Pause==false)
+		{
 		animator.SetFloat("Color", Nowcolor);
 		animator.SetBool("RollTrigger", rollTrigger);
 		animator.SetBool("ColorChanged", colorChanged);
 		ColorChange ();
+		}
 	}
 	public void ColorChange()
 	{
