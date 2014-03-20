@@ -5,6 +5,8 @@ using System;
 public class Game_Main : MonoBehaviour {
 	public GameObject P_STONE;
 	public GameObject P_CURSOR;
+	GlovalValue Sprite_GLOBALVALUE;
+	GameObject GLOBALVALUE;
 	public int[,] Banmen = new int[8, 8];
 	public int[,] BanmenFlag = new int[8, 8];//盤面に置けるかどうかの判別用
 	public int[,] BanmenFlag2 = new int[8, 8];//盤面に置けるかどうかの判別用
@@ -43,6 +45,8 @@ public class Game_Main : MonoBehaviour {
 	//盤面の初期化を行います
 	//初期駒も四つ置きます
 	void Start () {
+		GLOBALVALUE = GameObject.Find ("GlovalValue");
+		Sprite_GLOBALVALUE = GLOBALVALUE.GetComponent<GlovalValue> ();
 		Label_P1_0 = GameObject.Find ("Label_P1_0");
 		Label_P1_1 = GameObject.Find ("Label_P1_1");
 		Label_P2_0 = GameObject.Find ("Label_P2_0");
@@ -68,10 +72,20 @@ public class Game_Main : MonoBehaviour {
 				BanmenFlag2[i,j]=0;
 			}
 		}
+		if(Sprite_GLOBALVALUE.Flag_Intercept==true)
+		{
 		CanIntersept[0] = 1;
 		CanIntersept[1] = 1;
 		CanIntersept[2] = 1;
 		CanIntersept[3] = 1;
+		}
+		else
+		{
+			CanIntersept[0] = 0;
+			CanIntersept[1] = 0;
+			CanIntersept[2] = 0;
+			CanIntersept[3] = 0;
+		}
 		Vector3 Pos;
 		Pos.x = -2.7f;
 		Pos.y = 8.2f;
@@ -100,6 +114,41 @@ public class Game_Main : MonoBehaviour {
 		stonescript.Init(1);
 		AvaterSet ();
 		FieldCheck (1.0f);
+	}
+	void Finale()
+	{
+		int RedStones=0;
+		int YellowStones=0;
+		int GreenStones=0;
+		int BlueStones=0;
+		for (int i=0; i<8; i++)
+		{
+			for(int j=0;j<8;j++)
+			{
+				switch(Banmen[i,j])
+				{
+				case 1:
+					RedStones++;
+					break;
+				case 2:
+					YellowStones++;
+					break;
+				case 3:
+					GreenStones++;
+					break;
+				case 4:
+					BlueStones++;
+					break;
+				default:
+					break;
+				}
+			}
+		}
+		Sprite_GLOBALVALUE.RedStones = RedStones;
+		Sprite_GLOBALVALUE.YellowStones = YellowStones;
+		Sprite_GLOBALVALUE.GreenStones =GreenStones;
+		Sprite_GLOBALVALUE.BlueStones = BlueStones;
+		Application.LoadLevel ("Result");
 	}
 	void scoreCheck()
 	{
@@ -185,6 +234,8 @@ public class Game_Main : MonoBehaviour {
 	}
 	void Intersept()
 	{
+		if(Sprite_GLOBALVALUE.Flag_Intercept!=false)
+		{
 		Vector3 Pos;
 		GameObject obj;
 		InterSepting = true;
@@ -209,6 +260,7 @@ public class Game_Main : MonoBehaviour {
 						obj = Instantiate (this.P_CURSOR, Pos, Quaternion.identity) as GameObject;
 					}
 			}		
+		}
 		}
 	}
 	void AvaterSet()
@@ -974,13 +1026,31 @@ public class Game_Main : MonoBehaviour {
 			counter++;
 			if(counter>=60)
 			{
+				int flag=0;
+				for(int i=0;i<8;i++)
+				{
+					for(int j=0;j<8;j++)
+					{
+						if(Banmen[i,j]==0)
+							flag++;
+					}
+				}
+				if(flag!=0)
+				{
 				counter=0;
 				Turn++;
 				if(Turn>4)
+				{
 					Turn=1.0f;
+				}
 				Turn_Change();
 				GetComponent<Avater>().Turn=Turn;
 				SetEnd=false;
+				}
+				else if(flag==0)
+				{
+					Finale();
+				}
 			}
 		}
 	}

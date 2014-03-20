@@ -46,6 +46,10 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Picture\sprite\interface\Result\Result.cs" />
+     <Compile Include="Assets\Picture\sprite\interface\menu\ButtoninMenu.cs" />
+     <Compile Include="Assets\Picture\sprite\interface\menu\MB_Stage.cs" />
+     <Compile Include="Assets\Picture\sprite\interface\menu\ReturnButton_Menu.cs" />
      <Compile Include="Assets\Picture\sprite\interface\title\OffLinePlay.cs" />
      <Compile Include="Assets\Script\Avat\Bottoms.cs" />
      <Compile Include="Assets\Script\Avat\Face.cs" />
@@ -56,10 +60,12 @@
      <Compile Include="Assets\Script\Cursor.cs" />
      <Compile Include="Assets\Script\Cutin.cs" />
      <Compile Include="Assets\Script\Game_Main.cs" />
+     <Compile Include="Assets\Script\GlovalValue.cs" />
      <Compile Include="Assets\Script\Panel_Back.cs" />
      <Compile Include="Assets\Script\Stone.cs" />
      <Compile Include="Assets\Script\UI\BackTitleButton.cs" />
      <Compile Include="Assets\Script\UI\Back_Yes.cs" />
+     <Compile Include="Assets\Script\UI\MenuButton.cs" />
      <Compile Include="Assets\Script\UI\ResetButton.cs" />
      <Compile Include="Assets\Script\UI\Reset_No.cs" />
      <Compile Include="Assets\Script\UI\Reset_Yes.cs" />

@@ -1,16 +1,15 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Script\Game_Main.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Picture\sprite\interface\Result\Result.cs">
     <Files>
-      <File FileName="Assets\Script\Game_Main.cs" Line="149" Column="27" />
+      <File FileName="Assets\Script\Game_Main.cs" Line="123" Column="19" />
       <File FileName="Assets\Script\UI\ScoreLabel.cs" Line="1" Column="1" />
       <File FileName="Assets\Script\Stone.cs" Line="1" Column="1" />
       <File FileName="Assets\Picture\sprite\interface\title\OffLinePlay.cs" Line="1" Column="1" />
-      <File FileName="Assets\Script\UI\ResetButton.cs" Line="5" Column="2" />
-      <File FileName="Assets\Script\UI\Reset_Yes.cs" Line="4" Column="1" />
-      <File FileName="Assets\Script\UI\BackTitleButton.cs" Line="40" Column="4" />
-      <File FileName="Assets\Script\UI\Reset_No.cs" Line="14" Column="3" />
-      <File FileName="Assets\Script\UI\Back_Yes.cs" Line="4" Column="18" />
+      <File FileName="Assets\Script\GlovalValue.cs" Line="15" Column="24" />
+      <File FileName="Assets\Picture\sprite\interface\menu\ButtoninMenu.cs" Line="21" Column="45" />
+      <File FileName="Assets\Picture\sprite\interface\menu\MB_Stage.cs" Line="14" Column="65" />
+      <File FileName="Assets\Picture\sprite\interface\Result\Result.cs" Line="159" Column="12" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
