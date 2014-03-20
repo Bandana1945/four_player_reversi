@@ -134,14 +134,12 @@ public class Game_Main : MonoBehaviour {
 		}
 		for(int i=0;i<4;i++)
 		{
-			float Label1_Num=0;
-			float Label2_Num=0;
-			for(int j=0;j<4;j++)
-			{
-				switch(j)
+				float Label1_Num=0;
+				float Label2_Num=0;
+				switch(i)
 				{
 				case 0:
-					while(RedScore>10)
+					while(RedScore>9)
 					{
 						RedScore-=10;
 						Label2_Num++;
@@ -151,7 +149,7 @@ public class Game_Main : MonoBehaviour {
 					LP1_1.Num=Label2_Num;
 					break;
 				case 1:
-					while(YellowScore>10)
+					while(YellowScore>9)
 					{
 						YellowScore-=10;
 						Label2_Num++;
@@ -161,7 +159,7 @@ public class Game_Main : MonoBehaviour {
 					LP2_1.Num=Label2_Num;
 					break;
 				case 2:
-					while(GreenScore>10)
+					while(GreenScore>9)
 					{
 						GreenScore-=10;
 						Label2_Num++;
@@ -171,7 +169,7 @@ public class Game_Main : MonoBehaviour {
 					LP3_1.Num=Label2_Num;
 					break;
 				case 3:
-					while(BlueScore>10)
+					while(BlueScore>9)
 					{
 						BlueScore-=10;
 						Label2_Num++;
@@ -183,7 +181,6 @@ public class Game_Main : MonoBehaviour {
 				default:
 					break;
 				}
-			}
 		}
 	}
 	void Intersept()
